@@ -3,6 +3,8 @@ package uk.gov.hmcts.labs.hurricanepilot.controllers;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -17,16 +19,16 @@ import static org.springframework.web.bind.annotation.RequestMethod.GET;
 @RestController
 public class RootController {
 
-    @Operation(summary = "Get welcome api",
-        description = "This is a welcome endpoint"
-    )
+    private static final Logger LOG = LoggerFactory.getLogger(RootController.class);
+
+    @Operation(summary = "Get welcome api", description = "This is a welcome endpoint")
     @ApiResponses({
         @ApiResponse(responseCode = "200", description = "A welcome message"),
         @ApiResponse(responseCode = "404", description = "No welcome could be found")
     })
     @RequestMapping(value = "/", method = GET, produces = TEXT_PLAIN_VALUE)
-
     public ResponseEntity<String> welcome() {
+        LOG.info("favourite fruit is {}", System.getenv("FAVOURITE_FRUIT"));
         return ok("Welcome to labs-hurricanepilot app, my favourite fruit is " + System.getenv("FAVOURITE_FRUIT"));
     }
 }
