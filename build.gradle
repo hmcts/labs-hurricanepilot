@@ -217,9 +217,8 @@ dependencies {
   }
 }
 
-//mainClassName = 'uk.gov.hmcts.labs.hurricanepilot.Application'
-
 bootJar {
+  mainClass = 'uk.gov.hmcts.labs.hurricanepilot.Application'
   getArchiveFileName().set(provider {
     'labs-hurricanepilot.jar'
   })
